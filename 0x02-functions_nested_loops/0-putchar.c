@@ -2,7 +2,7 @@
 
 /**
 * main - prints putchar
-* this is a program that will print putchar
+*
 * Return: 0 Always
 */
 int main(void)
