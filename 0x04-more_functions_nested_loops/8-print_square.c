@@ -2,12 +2,12 @@
 #include "main.h"
 
 /**
-* prints_square - prints squares
+* prints_square - print squares
 * @size: parameter
 * Return: returns nothing
 */
 
-void prints_square(int size)
+void print_square(int size)
 {
 	int inc1, inc2;
 
@@ -19,6 +19,7 @@ void prints_square(int size)
 			{
 				putchar('#');
 			}
+
 			putchar('#');
 			putchar('\n');
 		}
