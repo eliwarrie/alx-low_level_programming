@@ -1,29 +1,27 @@
 #include "main.h"
 
 /**
-* leet - leet encoder
-* @str: string to be encoded string
-*Description -  encoded string 
-*
-* Return: address of the encoded string
-*/
-
+ *Description:  leet - encodes a string in last
+ *
+ * @str: String to be encoded
+ *
+ * Return: 0
+ */
 char *leet(char *str)
 {
-	int a = 0, b, l = 5;
-	char tr[5] = {'A', 'E', 'O', 'T', 'L'};
-	char trw[5] = {'4', '3', '0', '7', '1'};
+	int i = 0, k;
+	char s[] = "aAeEoOtTiL";
+	char s1[] = "4433007711";
 
-	while (x[a])
+	for (; str[i] != '\0'; i++)
 	{
-		b = 0;	
-		while (b < l)
+		for (k = 0; k <= 9; k++)
 		{
-			if (x[a] == tr[b] || x[a] - 32 == tr[b])
-				x[a] = trw[b];
-			b++;
+			if (s[k] == str[i])
+			{
+				str[i] = s1[k];
+			}
 		}
-		a++;
 	}
-	return (x);
+	return (str);
 }
