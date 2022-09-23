@@ -1,47 +1,30 @@
 #include "main.h"
 
 /**
-* print_number - print an integer
-* @n: integre to be printed
+* *rot13 - encode a string using rot13
+* @s: int type array pointer
 *
-* Return: address of the encoded
+* Return: address encoded address
 */
 
-char *rot13(char *str)
+char *rot13(char *s)
 {
-	int i = 0;
+	int i, ii;
+	char input[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+	char input[] = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
 
-	while (str[i] != '\0')
+	for (i = 0; s[i] != '\0'; i++)
 	{
-		str[i] = transform_2(str[i]);
-		i++;
-	}
-	return (str);
-}
-
-/**
-* transfer_2 - helper function to map a letter with it's rot13 encoding
-* @x: char the encoded char
-*
-* Return: the encoded char
-*/
-
-char transform_2(char x)
-{
-	char one[52] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-	char two[52] = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
-	int i = 0;
-	char replacement = x;
-
-	while (i < 52)
-	{
-		if (x == one[i])
+		for (ii = 0; ii < 54; ii++)
 		{
-			replacement = two[i];
-			break;
+			if (((s[i] <= 'z' && s[i] >= 'a') || (s[i] <= 'Z' && 'A'))
+					&& s[i] == input[ii])
+			{
+				s[i] = output[ii];
+				break;
+			}
 		}
-		i++;
 	}
-	return (replacement);
+	return (s);
 }
 
