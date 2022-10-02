@@ -5,16 +5,22 @@
 /**
  * main - program that multiply two numbers  new line
  * @argc: argument that contains argument input
- * @argv: argument that stores the strings in an array of char* (strings)
+ * @argv: argument that stores the strings in an array of char* strings
+ *
  * Return: 0 success
  */
 int main(int argc, char *argv[])
 {
-	if (argc != 3)
+	int i, j, k;
+
+	i = 1;
+	j = 2;
+	k = 3;
+	if (argc != k)
 	{
-		printf("Error\n" ,);
+		printf("Error\n");
 		return (1);
 	}
-	printf("%d\n", atoi(argv[1]) * atoi(argv[2]));
+	printf("%d\n", atoi(argc[i]) * atoi(argv[j]));
 	return (0);
 }
