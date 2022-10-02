@@ -1,32 +1,32 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <ctype.h>
 /**
  * main - print the addition of possitive numbers follow by new line
  * @argc: number argument to passed into the program
  * @argv:  An arrays of pointers to arguments.
  *
- * Return: If one of the number contain symbols that are none-digits - 1.
- *	otherwise - 0.
+ * Return: 0 if no errors, else 1.
  */
 int main(int argc, char *argv[])
 {
-	int num, digit, num = 0;
+	int a = 0, i, j;
 
-	for (num = 1; num < argc; num++)
+	for (i = 1; i < argc; i++)
 	{
-		for (digit = 0; argv[num][digit]; digit++)
+		for (j = 0; argv[i][j]; j++)
 		{
-			if (argv[num][digit] < '0' || argv[num][digit] > '9')
+			if (isdigit(argv[i][j]) == 0)
 			{
-				printf("Error\n");
+				puts("Error");
 				return (1);
 			}
 		}
-		sum += atoi(argv[num]);
 	}
-
-	printf("%d\n", sum);
-
+	for (i = 1; i < argc; i++)
+	{
+		a += atoi(argv[i]);
+	}
+	printf("%d\n", a);
 	return (0);
 }
