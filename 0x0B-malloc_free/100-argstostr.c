@@ -1,57 +1,53 @@
 #include "main.h"
+#include <stdlib.h>
 
 /**
- * len - return length of str
- * @str: string counted
- * Return: returns the length
- */
-int len(char *str)
-{
-	int len = 0
-
-		if (str != NULL)
-		{
-			while (str[len])
-				len++;
-		}
-	return (len);
-}
-
-/**
- * argstostr - a function that concanates all the argument of your program
- * @ac: count of args passed to the function
- * @av: array of arguments
+ * argstostr - Write a function that concatenates all the arguments
+ * of your program.Prototype: char *argstostr(int ac, char **av);
+ * Returns NULL if ac == 0 or av == NULL
+ * Returns a pointer to a new string, or NULL if it fails
+ * Each argument should be followed by a \n in the new string
  *
- * Return: pointer to the new string
+ * @ac: argument count.
+ * @av: argument vector.
+ *
+ * Return: pointer of an array of char
  */
-
 char *argstostr(int ac, char **av)
 {
-	char *new_string = NULL;
-	int k = 0, i = ac, j, sum = 0, temp = 0;
+	char *aout;
 
-	if (ac == 0 || av == NULL)
+	int c, i, j, ia;
+
+	if (ac == 0)
 		return (NULL);
 
-	while (ac--)
-		sum += (len(av[ac]) + 1);
-	new_string = (char *) malloc(sum + 1);
-
-	if (new_string != NULL)
+	for (c = i = 0; i < ac; i++)
 	{
-		while (k < i)
+		if (av[i] == NULL)
+			return (NULL);
+		for (j = 0; av[i][j] != '\0'; j++)
+			c++;
+		c++;
+	}
+		aout = malloc((c + 1) * sizeof(char));
+		if (aout == NULL)
 		{
-			for (j = 0; av[k][j] != '\0'; j++)
-				new_string[j + temp] = av[k][j];
-			new_string[temp + j] = '\n';
-			temp += (j + 1);
-			k++;
+			free(aout);
+			return (NULL);
 		}
-		new_string[temp] = '\0';
-	}
-	else
-	{
-		return (NULL);
-	}
-	return (new_string);
+		for (i = j = ia = 0; ia < c; j++, ia++)
+		{
+			if (av[i][j] == '\0')
+			{
+				aout[ia] = '\n';
+				i++;
+				ia++;
+				j = 0;
+			}
+			if (ia < c - 1)
+				aout[ia] = av[i][j];
+		}
+		aout[ia] = '\0';
+	return (aout);
 }
