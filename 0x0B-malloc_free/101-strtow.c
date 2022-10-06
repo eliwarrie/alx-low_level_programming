@@ -1,102 +1,69 @@
 #include "main.h"
+#include <stdlib.h>
 
 /**
- * len - return length of str
- * @str: string to be counted
+ * ch_free_grid - frees a 2 dimensional array.
+ * @grid: multidimensional array of char.
+ * @height: height of the array.
  *
- * Return: length of the string
+ * Return: no return
  */
 
-int len(char *str)
+void ch_free_grid(char **grid, unsigned int height)
 {
-	int len = 0;
-
-	if (str != NULL)
+	if (grid != NULL && height != 0)
 	{
-		while (str[len])
-			len++;
+		for (; height > 0; height--)
+			free(grid[height]);
+		free(grid[height]);
+		free(grid);
 	}
-	return (len);
 }
 
 /**
- * num_words - counts the number of words in the str.
- * @str: string to be used.
+ * strtow - splits a string into words.
+ * @str: string.
  *
- * Return; number of words
- */
-
-int num_words(char *str)
-{
-	int i = 0, words = 0;
-
-	while (i <= len(str))
-	{
-		if ((str[i] != ' ') && (str[i] != '\0'))
-		{
-			i++;
-		}
-		else if (((str[i] == ' ') || (str[i] == '\0')) && i && (str[i - 1] != ' '))
-		{
-			words += 1;
-			i++;
-		}
-		else
-		{
-			i++;
-		}
-	}
-	return (words);
-}
-
-/**
- * strtow - splits a string into words
- * @str: string to be splitted
- *
- * Return: pointer to the array of splitted words
+ * Return: pointer of an array of integers
  */
 
 char **strtow(char *str)
 {
-	char **split;
-	int i, j = 0, temp = 0, size = 0, words = num_words(str);
+	char **aout;
+	unsigned int c, height, i, j, a1;
 
-	if (words == 0)
+	if (str == NULL || *str == '\0')
 		return (NULL);
-	split = (char **)malloc(sizeof(char *) * (words + 1));
-	if (split != NULL)
+	for (c = height = 0; str[c] != '\0'; c++)
+		if (str[c] != ' ' && (str[c + 1] == ' ' || str[c + 1] == '\0'))
+			height++;
+	aout = malloc((height + 1) * sizeof(char *));
+		if (aout == NULL || height == 0)
 	{
-		for (i = 0; i <= len(str) && words; i++)
+		free(aout);
+		return (NULL);
+	}
+		for (i = a1 = 0; i < height; i++)
 		{
-			if ((str[i] != ' ') && (str[i] != '\0'))
-				size++;
-			else if (((str[i] == ' ') || (str[i] == '\0')) && i && (str[i - 1] != ' '))
+			for (c = a1; str[c] != '\0'; c++)
 			{
-				split[j] = (char *)malloc(sizeof(char) * size = 1);
-				if (split[j] != NULL)
+				if (str[c] == ' ')
+					a1++;
+				if (str[c] != ' ' && (str[c + 1] == ' ' || str[c + 1] == '\0'))
 				{
-					while (temp < size)
+					aout[i] = malloc((c - a1 + 2) * sizeof(char));
+					if (aout[i] == NULL)
 					{
-						split[j][temp] = str[(i - size) + temp];
-						temp++;
+						ch_free_grid(aout, i);
+						return (NULL);
 					}
-					split[j][temp] = '\0';
-					size = temp = 0;
-					j++;
-				}
-				else
-				{
-					while (j-- >= 0)
-						free(split[j]);
-					free(split);
-					return (NULL);
+					break;
 				}
 			}
+			for (j = 0; a1 <= c; a1++, j++)
+				aout[i][j] = str[a1];
+			aout[i][j] = '\0';
 		}
-		split[words] = NULL;
-		return (split);
-	}
-	else
-		return (NULL);
+		aout[i] = NULL;
+	return (aout);
 }
-
